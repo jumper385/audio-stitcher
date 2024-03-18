@@ -1,4 +1,5 @@
 from pydub import AudioSegment
+from helpers import generate_random_string
 
 class Snippet():
     def __init__(self, filepath, fade_in_sec = None, fade_out_sec = None):
@@ -16,3 +17,7 @@ class Snippet():
             audio_out.fade_out(duration = self.fade_out_sec)
 
         return audio_out
+
+    def debug(self, debug_filename = None, debug_dir = "build/debug"):
+        filename = generate_random_string(6) if debug_filename == None else debug_filename
+        self.wav.export(f"{debug_dir}/{filename}.mp3", format="mp3")
